@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentines bb Hihi</title>
+
+<style>
+:root{
+  --bg: url("https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif");
+}
+
+body{
+  margin:0;
+  font-family:"Comic Sans MS", cursive;
+  background-image: var(--bg);
+  background-size: cover;
+  background-position:center;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+}
+
+/* Floating hearts */
+.heart{
+  position:absolute;
+  font-size:22px;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh);}
+}
+
+/* DARK CARD */
+.card{
+  background:rgba(0,0,0,0.65);
+  backdrop-filter: blur(12px);
+  padding:40px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 0 40px rgba(255,0,100,0.4);
+  transition:0.6s;
+}
+
+h1{
+  margin-bottom:20px;
+  color:#ff9ecb;
+}
+
+/* Buttons */
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+button{
+  padding:12px 28px;
+  font-size:18px;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#yes{
+  background:#ff4d88;
+  color:white;
+}
+
+#yes:hover{
+  transform:scale(1.1);
+  background:#ff2d70;
+}
+
+#no{
+  background:#444;
+  color:white;
+  position:relative;
+}
+
+/* PAPER SCENE */
+.scene{
+  position:absolute;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  perspective:1200px;
+}
+
+/* Folded paper */
+.paper{
+  width:min(90vw, 500px);   /* responsive width */
+  min-height:240px;         /* minimum size */
+  max-height:80vh;          /* prevents going off screen */
+  overflow:auto;            /* adds scroll if super long */
+  background:#fff0f6;
+  color:#ff4d88;
+  border-radius:10px;
+  transform-style:preserve-3d;
+  transform:rotateX(90deg);
+  transition:1s;
+  box-shadow:0 20px 50px rgba(0,0,0,0.4);
+  padding:25px;
+  text-align:center;
+}
+
+.paper.open{
+  transform:rotateX(0deg);
+}
+
+.paper-text{
+  font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <h1>Will you be my Valentine po ba hihi? 💖</h1>
+  <div class="buttons">
+    <button id="yes">Yes !🥰</button>
+    <button id="no">No 😢</button>
+  </div>
+</div>
+
+<div class="scene" id="scene">
+  <div class="paper" id="paper">
+    <div class="paper-text">
+      💌 Hii lovee,<br><br>
+      Happy Valentines love! I wanna say na I love you so so much and i'm thankful po na i get to spend another valentines with you po. I'm glad na we went from spending valentines together online lang po na itoo magkasama a us hihi. I'm thankful po na you're always there for me so dont forget po na aun i'm here for you po always. I love you baby ko so much po don't forget it. I'm here po and i'm excited to spend this valentines and future valentines with you po hihihi. I love you so so so much baby koo.<br><br>
+      We'll eat so much foods and go around the park po my loveee mwah
+    </div>
+  </div>
+</div>
+
+<script>
+// floating hearts
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💗";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(Math.random()*3+3)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},500);
+
+// runaway no button
+const no = document.getElementById("no");
+
+// Function to move the button
+function moveNo() {
+  no.style.position = "absolute";
+  no.style.left = Math.random() * 80 + "%";
+  no.style.top = Math.random() * 80 + "%";
+}
+
+// Desktop hover
+no.onmouseover = moveNo;
+
+// Mobile tap
+no.ontouchstart = moveNo;
+
+
+// yes click → show paper
+document.getElementById("yes").onclick=()=>{
+  const card=document.getElementById("card");
+  card.style.opacity="0";
+  setTimeout(()=>{
+    card.style.display="none";
+    document.getElementById("scene").style.display="flex";
+
+    setTimeout(()=>{
+      document.getElementById("paper").classList.add("open");
+    },200);
+
+  },600);
+};
+</script>
+
+</body>
+</html>
